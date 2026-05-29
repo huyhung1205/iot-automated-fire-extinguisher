@@ -42,7 +42,83 @@ The system consists of 4 main functional blocks:
 - **Control Latency:** ~0.5s manual override delay under stable Wi-Fi.
 - **Reliability:** ESP32 operates independently even if the internet is lost to ensure safety.
 
-## 📸 Screenshots
-- **Dashboard:** Real-time monitoring of sensors.
-- **Manual Mode:** Remote joystick for servo control.
-- **Fire History:** Data visualization of past events.
+## 📱 Android App UI
+
+### Dashboard
+
+<table>
+  <tr>
+    <td align="center"><img src="image/home.png" alt="Home" width="190"></td>
+    <td align="center"><img src="image/canhbao.png" alt="Cảnh báo" width="190"></td>
+    <td align="center"><img src="image/dieukhien.png" alt="Điều khiển" width="190"></td>
+  </tr>
+</table>
+
+### History 
+
+<table>
+  <tr>
+    <td align="center"><img src="image/history-list.png" alt="History List" width="190"></td>
+    <td align="center"><img src="image/history-chart.png" alt="History Chart" width="190"></td>
+    <td align="center"><img src="image/nguong.png" alt="Ngưỡng" width="190"></td>
+
+  </tr>
+</table>
+
+### Alert
+
+<table>
+  <tr>
+    <td align="center"><img src="image/warning.png" alt="Warning 1" width="190"></td>
+        <td align="center"><img src="image/notify.png" alt="Thông báo" width="190"></td>
+  </tr>
+</table>
+
+
+## System Flow
+
+```text
+[Cảm biến] -> [ESP32] -> [Firebase RTDB] -> [Android App]
+      |            |              |
+      |            |              +-> Dashboard / History / Alert / Control
+      |            +-> Servo / Pump / Siren
+      +-> DHT11 / MQ-2 / Flame Sensors
+```
+
+## Data Structure
+
+```text
+fire-alarm-system/
+├── sensors/        (ESP32 ghi -> App đọc)
+├── actuators/      (ESP32 ghi -> App đọc)
+├── system/         (ESP32 ghi -> App đọc)
+├── alert/          (App ghi <-> ESP32 đọc)
+├── thresholds/     (App ghi -> ESP32 đọc)
+├── control/        (App ghi -> ESP32 đọc qua Stream)
+└── logs/           (ESP32 ghi -> App đọc)
+```
+
+## Setup Instructions
+
+### Android App
+
+1. Open the Android project in Android Studio.
+2. Check that the file `google-services.json` is located in the `app/` directory.
+3. Sync Gradle.
+4. Build and run the app on an Android device or emulator.
+
+### ESP32
+
+1. Open the ESP32 firmware in Arduino IDE.
+2. Update the following configurations: credentials.h
+   - WiFi credentials (SSID and Password)
+   - Firebase URL
+   - Firebase Auth
+3. Upload the firmware to the ESP32.
+
+## Important Notes
+
+- The system requires a stable internet connection for full functionality.
+- Fire detection and alerts will be triggered when the system detects smoke or fire.
+- Firebase and ESP32 configurations must be synchronized for the app to display data correctly.
+
