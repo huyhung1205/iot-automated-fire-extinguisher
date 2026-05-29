@@ -89,13 +89,13 @@ The system consists of 4 main functional blocks:
 
 ```text
 fire-alarm-system/
-├── sensors/        (ESP32 ghi -> App đọc)
-├── actuators/      (ESP32 ghi -> App đọc)
-├── system/         (ESP32 ghi -> App đọc)
-├── alert/          (App ghi <-> ESP32 đọc)
-├── thresholds/     (App ghi -> ESP32 đọc)
-├── control/        (App ghi -> ESP32 đọc qua Stream)
-└── logs/           (ESP32 ghi -> App đọc)
+├── sensors/        (ESP32 writes -> App reads)
+├── actuators/      (ESP32 writes -> App reads)
+├── system/         (ESP32 writes -> App reads)
+├── alert/          (App writes <-> ESP32 reads)
+├── thresholds/     (App writes -> ESP32 reads)
+├── control/        (App writes -> ESP32 reads via Stream)
+└── logs/           (ESP32 writes -> App reads)
 ```
 
 ## Setup Instructions
