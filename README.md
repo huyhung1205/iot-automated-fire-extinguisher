@@ -100,6 +100,29 @@ fire-alarm-system/
 
 ## Setup Instructions
 
+## APK Download & Versioning (GitHub)
+
+To make your GitHub page show versioned app downloads, use GitHub Releases.
+
+1. Create a version tag and push it:
+
+```bash
+git tag v1.0.1
+git push origin v1.0.1
+```
+
+2. The workflow in `.github/workflows/android-release.yml` will:
+- Build the Android APK automatically.
+- Create a GitHub Release named `SmartFireMonitoring vX.Y.Z`.
+- Attach file `SmartFireMonitoring-vX.Y.Z.apk` for one-click download.
+
+3. Users download from the `Releases` tab on GitHub.
+
+Suggested version format:
+- `v1.0.0` initial release
+- `v1.0.1` bug fix
+- `v1.1.0` new features
+
 ### Android App
 
 1. Open the Android project in Android Studio.
