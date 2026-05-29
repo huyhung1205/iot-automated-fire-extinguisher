@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    android:fillViewport="true">
+    android:clipToPadding="false"
+    android:overScrollMode="never">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,207 +14,164 @@
         android:orientation="vertical"
         android:padding="@dimen/screen_padding">
 
+        <!-- Header -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/spacing_24"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Thiết lập Ngưỡng"
+                style="@style/TextAppearance.SmartFireMonitoring.Hero" />
+        </LinearLayout>
+
+        <!-- Current Configuration Info Card -->
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            app:cardBackgroundColor="@color/card_surface"
-            app:cardCornerRadius="18dp"
-            app:cardElevation="2dp"
-            app:strokeWidth="0dp">
-
+            android:layout_marginBottom="@dimen/spacing_24"
+            app:cardBackgroundColor="@color/info_soft"
+            app:cardElevation="0dp"
+            app:strokeWidth="0dp"
+            app:cardCornerRadius="@dimen/card_corner_radius">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="@dimen/card_padding">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Cài đặt Ngưỡng"
-                        android:textAppearance="@style/TextAppearance.SmartFireMonitoring.ScreenTitle" />
-
-                    <View
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:layout_weight="1" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/bg_chip_info"
-                        android:paddingHorizontal="10dp"
-                        android:paddingVertical="5dp"
-                        android:text="SETUP"
-                        android:textColor="@color/primary_dark"
-                        android:textSize="@dimen/caption_text_size"
-                        android:textStyle="bold" />
-                </LinearLayout>
-
+                android:padding="@dimen/card_padding"
+                android:orientation="vertical">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
-                    android:text="Chỉnh ngưỡng MQ-2 và nhiệt độ để ESP32 đánh giá chính xác hơn"
-                    android:textColor="@color/text_secondary"
-                    android:textSize="@dimen/body_text_size" />
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
-
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            app:cardBackgroundColor="@color/card_surface"
-            app:cardCornerRadius="18dp"
-            app:cardElevation="2dp"
-            app:strokeWidth="0dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="@dimen/card_padding">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="12dp"
-                    android:text="Khí Gas / Khói (MQ-2)"
-                    android:textColor="@color/text_primary"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.SmartFireMonitoring.InputLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="12dp"
-                    android:hint="Ngưỡng An toàn (ADC)">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/etMq2Safe"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="number" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.SmartFireMonitoring.InputLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Ngưỡng Cảnh báo (ADC)">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/etMq2Warning"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="number" />
-                </com.google.android.material.textfield.TextInputLayout>
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
-
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            app:cardBackgroundColor="@color/card_surface"
-            app:cardCornerRadius="18dp"
-            app:cardElevation="2dp"
-            app:strokeWidth="0dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="@dimen/card_padding">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="12dp"
-                    android:text="Nhiệt độ Môi trường"
-                    android:textColor="@color/text_primary"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.SmartFireMonitoring.InputLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="12dp"
-                    android:hint="Ngưỡng An toàn (°C)">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/etTempSafe"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="numberDecimal" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.SmartFireMonitoring.InputLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Ngưỡng Cảnh báo (°C)">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/etTempWarning"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="numberDecimal" />
-                </com.google.android.material.textfield.TextInputLayout>
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnSaveThresholds"
-            style="@style/Widget.SmartFireMonitoring.PrimaryButton"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginBottom="16dp"
-            android:text="Lưu ngưỡng" />
-
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardBackgroundColor="@color/surface_soft"
-            app:cardCornerRadius="18dp"
-            app:cardElevation="2dp"
-            app:strokeWidth="0dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="@dimen/card_padding">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:text="Ngưỡng hiện tại trên ESP32"
-                    android:textColor="@color/primary"
-                    android:textSize="@dimen/caption_text_size"
-                    android:textStyle="bold" />
-
+                    android:text="Cấu hình hiện tại trên ESP32"
+                    style="@style/TextAppearance.SmartFireMonitoring.Label"
+                    android:textColor="@color/primary" />
                 <TextView
                     android:id="@+id/tvCurrentThresholds"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:lineSpacingExtra="4dp"
+                    android:layout_marginTop="@dimen/spacing_small"
                     android:text="Đang tải dữ liệu..."
-                    android:textColor="@color/primary_dark"
-                    android:textSize="@dimen/body_text_size" />
+                    style="@style/TextAppearance.SmartFireMonitoring.Body"
+                    android:textColor="@color/primary_variant"
+                    android:textStyle="bold"
+                    android:lineSpacingExtra="4dp" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
+
+        <!-- MQ-2 Settings -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/spacing_16"
+            style="@style/Widget.SmartFireMonitoring.Card">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/card_padding"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Khí gas / khói (MQ-2)"
+                    style="@style/TextAppearance.SmartFireMonitoring.CardTitle"
+                    android:layout_marginBottom="@dimen/spacing_16"/>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_12"
+                    android:hint="Ngưỡng An toàn (ADC)"
+                    app:startIconDrawable="@drawable/ic_gas"
+                    app:startIconTint="@color/primary"
+                    style="@style/Widget.SmartFireMonitoring.InputLayout">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etMq2Safe"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:textSize="@dimen/text_size_body" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Ngưỡng Cảnh báo (ADC)"
+                    app:startIconDrawable="@drawable/ic_gas"
+                    app:startIconTint="@color/warning"
+                    style="@style/Widget.SmartFireMonitoring.InputLayout">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etMq2Warning"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:textSize="@dimen/text_size_body" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Temperature Settings -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/spacing_24"
+            style="@style/Widget.SmartFireMonitoring.Card">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/card_padding"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nhiệt độ môi trường"
+                    style="@style/TextAppearance.SmartFireMonitoring.CardTitle"
+                    android:layout_marginBottom="@dimen/spacing_16"/>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_12"
+                    android:hint="Ngưỡng An toàn (°C)"
+                    app:startIconDrawable="@drawable/ic_temp"
+                    app:startIconTint="@color/primary"
+                    style="@style/Widget.SmartFireMonitoring.InputLayout">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etTempSafe"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="numberDecimal"
+                        android:textSize="@dimen/text_size_body" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Ngưỡng Cảnh báo (°C)"
+                    app:startIconDrawable="@drawable/ic_temp"
+                    app:startIconTint="@color/warning"
+                    style="@style/Widget.SmartFireMonitoring.InputLayout">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etTempWarning"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="numberDecimal"
+                        android:textSize="@dimen/text_size_body" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Save Button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSaveThresholds"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/button_min_height"
+            android:layout_marginBottom="@dimen/spacing_24"
+            android:text="Lưu cấu hình"
+            style="@style/Widget.SmartFireMonitoring.Button.Primary" />
 
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

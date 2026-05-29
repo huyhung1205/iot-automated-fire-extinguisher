@@ -42,11 +42,9 @@ public class DashboardFragment extends Fragment {
 
     private TextView tvTemp;
     private TextView tvHumidity;
-    private TextView tvDhtStatus;
     private TextView tvMq2Value;
     private TextView tvMq2Level;
     private TextView tvDirection;
-    private TextView tvFlameStatus;
     private TextView tvPump;
     private TextView tvBuzzer;
     private TextView tvServoX;
@@ -85,11 +83,9 @@ public class DashboardFragment extends Fragment {
 
         tvTemp = view.findViewById(R.id.tvTemp);
         tvHumidity = view.findViewById(R.id.tvHumidity);
-        tvDhtStatus = view.findViewById(R.id.tvDhtStatus);
         tvMq2Value = view.findViewById(R.id.tvMq2Value);
         tvMq2Level = view.findViewById(R.id.tvMq2Level);
         tvDirection = view.findViewById(R.id.tvDirection);
-        tvFlameStatus = view.findViewById(R.id.tvFlameStatus);
         tvPump = view.findViewById(R.id.tvPump);
         tvBuzzer = view.findViewById(R.id.tvBuzzer);
         tvServoX = view.findViewById(R.id.tvServoX);
@@ -140,17 +136,15 @@ public class DashboardFragment extends Fragment {
                 Double hum = snapshot.child("sensors/dht11/humidity").getValue(Double.class);
                 String dhtStatus = snapshot.child("sensors/dht11/status").getValue(String.class);
                 if (isErrorStatus(dhtStatus)) {
-                    tvTemp.setText("Nhiệt độ: ERROR");
-                    tvHumidity.setText("Độ ẩm: ERROR");
+                    tvTemp.setText("error");
+                    tvHumidity.setText("error");
                     tvTemp.setTextColor(Color.parseColor("#B91C1C"));
                     tvHumidity.setTextColor(Color.parseColor("#B91C1C"));
-                    applyStatusChip(tvDhtStatus, "LỖI", "#FEE2E2", "#B91C1C");
                 } else {
                     tvTemp.setText("🌡 Nhiệt độ: " + valueOrPlaceholder(temp, "--") + "°C");
                     tvHumidity.setText("💧 Độ ẩm: " + valueOrPlaceholder(hum, "--") + "%");
                     tvTemp.setTextColor(Color.parseColor("#1E3A8A"));
                     tvHumidity.setTextColor(Color.parseColor("#0F766E"));
-                    applyStatusChip(tvDhtStatus, "OK", "#ECFDF5", "#166534");
                 }
 
                 // Đọc MQ-2
@@ -207,14 +201,12 @@ public class DashboardFragment extends Fragment {
                 if (isErrorStatus(flameStatus)) {
                     tvDirection.setText("Hướng: ERROR");
                     tvDirection.setTextColor(Color.parseColor("#B91C1C"));
-                    applyStatusChip(tvFlameStatus, "LỖI", "#FEE2E2", "#B91C1C");
                     for (View eye : flameEyes) {
                         eye.setBackgroundResource(R.drawable.eye_status_yellow);
                     }
                 } else {
                     tvDirection.setText("Hướng: " + (direction != null ? direction : "--"));
                     tvDirection.setTextColor(Color.parseColor("#334155"));
-                    applyStatusChip(tvFlameStatus, "OK", "#ECFDF5", "#166534");
                 }
 
                 // Bơm và còi
@@ -287,7 +279,7 @@ public class DashboardFragment extends Fragment {
 
         if (lastSeenTimestamp <= 0L) {
             heartbeatMissCount = 0;
-            tvStatus.setText("Heartbeat Firebase: Chưa có dữ liệu");
+            tvStatus.setText("Heartbeat Firebase: Chưa có dữ liệu mới");
             tvStatus.setTextColor(Color.parseColor("#64748B"));
             statusDot.setBackgroundResource(R.drawable.eye_status_yellow);
             if (tvHeartbeatStatus != null) {
@@ -327,7 +319,7 @@ public class DashboardFragment extends Fragment {
             boolean esp32Running = lastSeenTimestamp > 0L
                     || (firmwareVersion != null && !"--".equals(firmwareVersion))
                     || wifiConnectedStable;
-            tvEsp32Power.setText(esp32Running ? "ESP32: Đang chạy" : "ESP32: Chưa có dữ liệu");
+            tvEsp32Power.setText(esp32Running ? "Đang chạy" : "Chưa có dữ liệu");
             tvEsp32Power.setTextColor(Color.parseColor(esp32Running ? "#0F172A" : "#64748B"));
         }
     }

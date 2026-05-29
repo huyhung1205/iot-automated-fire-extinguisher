@@ -6,82 +6,83 @@
     android:layout_height="match_parent"
     android:background="@color/background"
     android:orientation="vertical"
-    android:padding="16dp"
+    android:padding="@dimen/screen_padding"
     tools:context=".HistoryFragment">
 
+    <!-- Header -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/spacing_24"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lịch sử Sự kiện"
+            style="@style/TextAppearance.SmartFireMonitoring.Hero" />
+    </LinearLayout>
+
+    <!-- Summary & Toggle Card -->
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardBackgroundColor="@color/surface"
-        app:cardCornerRadius="@dimen/card_corner_radius"
-        app:cardElevation="@dimen/card_elevation"
-        app:strokeColor="@color/border"
-        app:strokeWidth="1dp">
-
+        android:layout_marginBottom="@dimen/spacing_large"
+        style="@style/Widget.SmartFireMonitoring.Card">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="@dimen/card_padding">
+            android:padding="@dimen/card_padding"
+            android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="LỊCH SỬ SỰ KIỆN CHÁY"
-                android:textColor="@color/text_primary"
-                android:textSize="@dimen/title_text_size"
-                android:textStyle="bold" />
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/tvHistoryCount"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="0 sự kiện"
+                    style="@style/TextAppearance.SmartFireMonitoring.ScreenTitle"
+                    android:textSize="@dimen/text_size_section" />
+                <ImageView
+                    android:layout_width="@dimen/icon_size_standard"
+                    android:layout_height="@dimen/icon_size_standard"
+                    android:src="@android:drawable/ic_menu_recent_history"
+                    app:tint="@color/primary" />
+            </LinearLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
+            <com.google.android.material.button.MaterialButtonToggleGroup
+                android:id="@+id/toggleHistoryView"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="Xem lại các sự kiện cháy đã ghi nhận trên Firebase"
-                android:textColor="@color/text_secondary"
-                android:textSize="@dimen/body_text_size" />
-
-            <TextView
-                android:id="@+id/tvHistoryCount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:background="@color/chip_neutral_bg"
-                android:paddingHorizontal="@dimen/content_padding"
-                android:paddingVertical="6dp"
-                android:text="0 sự kiện"
-                android:textColor="@color/primary_dark"
-                android:textSize="@dimen/caption_text_size"
-                android:textStyle="bold" />
+                android:layout_marginTop="@dimen/spacing_large"
+                app:checkedButton="@id/btnHistoryList"
+                app:selectionRequired="true"
+                app:singleSelection="true">
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnHistoryList"
+                    style="@style/Widget.SmartFireMonitoring.Button.Toggle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Danh sách"
+                    android:textSize="13sp" />
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnHistoryChart"
+                    style="@style/Widget.SmartFireMonitoring.Button.Toggle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Biểu đồ"
+                    android:textSize="13sp" />
+            </com.google.android.material.button.MaterialButtonToggleGroup>
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 
-    <com.google.android.material.button.MaterialButtonToggleGroup
-        android:id="@+id/toggleHistoryView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        app:checkedButton="@id/btnHistoryList"
-        app:selectionRequired="true"
-        app:singleSelection="true">
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnHistoryList"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Danh sách"
-            android:textAllCaps="false" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnHistoryChart"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Biểu đồ"
-            android:textAllCaps="false" />
-    </com.google.android.material.button.MaterialButtonToggleGroup>
-
+    <!-- Content Area -->
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -92,23 +93,27 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clipToPadding="false"
-            android:paddingBottom="8dp"
+            android:paddingBottom="@dimen/spacing_24"
             tools:listitem="@layout/item_fire_event" />
 
         <com.github.mikephil.charting.charts.LineChart
             android:id="@+id/chartHistory"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="gone" />
+            android:visibility="gone"
+            android:background="@color/surface"
+            android:layout_marginBottom="@dimen/spacing_24" />
 
         <TextView
             android:id="@+id/tvHistoryEmpty"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="Chưa có sự kiện cháy nào"
-            android:textColor="#94A3B8"
-            android:textSize="14sp"
+            android:text="Không có dữ liệu lịch sử"
+            style="@style/TextAppearance.SmartFireMonitoring.Body"
+            android:textColor="@color/text_secondary"
+            android:drawableTop="@android:drawable/ic_menu_search"
+            android:drawablePadding="@dimen/spacing_medium"
             android:visibility="gone" />
     </FrameLayout>
 

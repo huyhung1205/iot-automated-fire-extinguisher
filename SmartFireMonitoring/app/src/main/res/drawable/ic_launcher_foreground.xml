@@ -2,10 +2,10 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
         <inset
-            android:insetLeft="26dp"
-            android:insetTop="26dp"
-            android:insetRight="26dp"
-            android:insetBottom="26dp">
+            android:insetLeft="34dp"
+            android:insetTop="34dp"
+            android:insetRight="34dp"
+            android:insetBottom="34dp">
             <bitmap
                 android:gravity="center"
                 android:src="@drawable/logo" />

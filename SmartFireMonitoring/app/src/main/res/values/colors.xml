@@ -1,24 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="safe_green">#4CAF50</color>
-    <color name="warning_yellow">#FFC107</color>
-    <color name="danger_red">#F44336</color>
-    <color name="primary">#1976D2</color>
-    <color name="primary_dark">#0D47A1</color>
-    <color name="background">#F5F5F5</color>
+    <!-- Brand Colors -->
+    <color name="primary">#2563EB</color>
+    <color name="primary_variant">#1D4ED8</color>
+    <color name="accent">#06B6D4</color>
 
+    <!-- Semantic Colors -->
+    <color name="success">#16A34A</color>
+    <color name="warning">#F59E0B</color>
+    <color name="danger">#DC2626</color>
+
+    <!-- Background & Surface -->
+    <color name="background">#F1F5F9</color>
     <color name="surface">#FFFFFF</color>
-    <color name="surface_variant">#F8FAFC</color>
-    <color name="card_surface">#F7FBFF</color>
-    <color name="surface_soft">#EEF6FF</color>
+    <color name="surface_variant">#EAF0F7</color>
+    <color name="border">#E2E8F0</color>
+
+    <!-- Text Colors -->
     <color name="text_primary">#0F172A</color>
     <color name="text_secondary">#64748B</color>
-    <color name="border">#E2E8F0</color>
-    <color name="chip_safe_bg">#DCFCE7</color>
-    <color name="chip_warning_bg">#FEF3C7</color>
-    <color name="chip_danger_bg">#FEE2E2</color>
-    <color name="chip_info_bg">#DBEAFE</color>
-    <color name="chip_neutral_bg">#EEF2FF</color>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="text_on_primary">#FFFFFF</color>
+
+    <!-- Soft variants for chips/backgrounds -->
+    <color name="success_soft">#DCFCE7</color>
+    <color name="warning_soft">#FEF3C7</color>
+    <color name="danger_soft">#FEE2E2</color>
+    <color name="info_soft">#DBEAFE</color>
+
+    <!-- Basic -->
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="transparent">#00000000</color>
+
+    <!-- Legacy Compatibility Aliases -->
+    <color name="chip_safe_bg">@color/success_soft</color>
+    <color name="chip_warning_bg">@color/warning_soft</color>
+    <color name="chip_danger_bg">@color/danger_soft</color>
+    <color name="chip_info_bg">@color/info_soft</color>
+    <color name="chip_neutral_bg">#F1F5F9</color>
+    <color name="primary_dark">@color/primary_variant</color>
+    <color name="safe_green">@color/success</color>
+    <color name="warning_yellow">@color/warning</color>
+    <color name="danger_red">@color/danger</color>
 </resources>

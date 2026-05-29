@@ -1,22 +1,30 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <style name="Base.Theme.SmartFireMonitoring" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Colors (Night) -->
         <item name="colorPrimary">@color/primary</item>
         <item name="colorOnPrimary">@color/white</item>
-        <item name="colorPrimaryContainer">@color/primary_dark</item>
+        <item name="colorPrimaryContainer">@color/primary_variant</item>
         <item name="colorOnPrimaryContainer">@color/white</item>
-        <item name="colorSecondary">@color/safe_green</item>
+        <item name="colorSecondary">@color/accent</item>
         <item name="colorOnSecondary">@color/white</item>
-        <item name="colorTertiary">@color/warning_yellow</item>
-        <item name="colorError">@color/danger_red</item>
-        <item name="colorSurface">#111827</item>
-        <item name="colorOnSurface">#E5E7EB</item>
-        <item name="colorSurfaceVariant">#1F2937</item>
-        <item name="android:colorBackground">#0B1220</item>
-        <item name="android:statusBarColor" tools:targetApi="l">@color/primary_dark</item>
-        <item name="android:navigationBarColor" tools:targetApi="l">#0B1220</item>
+        <item name="colorError">@color/danger</item>
+        <item name="colorOnError">@color/white</item>
+
+        <item name="android:colorBackground">#0F172A</item>
+        <item name="colorSurface">#1E293B</item>
+        <item name="colorOnSurface">#F8FAFC</item>
+        <item name="colorSurfaceVariant">#334155</item>
+        <item name="colorOnSurfaceVariant">#94A3B8</item>
+        <item name="colorOutline">#475569</item>
+
+        <!-- Status Bar & Navigation Bar (Night) -->
+        <item name="android:statusBarColor">#0F172A</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:navigationBarColor">#0F172A</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="27">false</item>
+
+        <!-- Component Styles -->
         <item name="materialCardViewStyle">@style/Widget.SmartFireMonitoring.Card</item>
-        <item name="textAppearanceHeadlineLarge">@style/TextAppearance.SmartFireMonitoring.Title</item>
-        <item name="textAppearanceBodyMedium">@style/TextAppearance.SmartFireMonitoring.Body</item>
-        <item name="textAppearanceLabelSmall">@style/TextAppearance.SmartFireMonitoring.Caption</item>
+        <item name="bottomNavigationStyle">@style/Widget.SmartFireMonitoring.BottomNav</item>
     </style>
 </resources>

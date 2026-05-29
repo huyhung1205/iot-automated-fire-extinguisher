@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    android:fillViewport="true">
+    android:clipToPadding="false"
+    android:overScrollMode="never">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -12,138 +14,84 @@
         android:orientation="vertical"
         android:padding="@dimen/screen_padding">
 
-        <com.google.android.material.card.MaterialCardView
+        <!-- Header -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            app:cardBackgroundColor="@color/card_surface"
-            app:cardCornerRadius="18dp"
-            app:cardElevation="2dp"
-            app:strokeWidth="0dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
+            android:layout_marginBottom="@dimen/spacing_24"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="@dimen/card_padding">
+                android:text="Quản lý Thông báo"
+                style="@style/TextAppearance.SmartFireMonitoring.Hero" />
+        </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Quản lý Cảnh báo"
-                        android:textAppearance="@style/TextAppearance.SmartFireMonitoring.ScreenTitle" />
-
-                    <View
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:layout_weight="1" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/bg_chip_warning"
-                        android:paddingHorizontal="10dp"
-                        android:paddingVertical="5dp"
-                        android:text="ALERT"
-                        android:textColor="#9A3412"
-                        android:textSize="@dimen/caption_text_size"
-                        android:textStyle="bold" />
-                </LinearLayout>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
-                    android:text="Bật/tắt cảnh báo, tạm ngưng và theo dõi lần phát hiện gần nhất"
-                    android:textColor="@color/text_secondary"
-                    android:textSize="@dimen/body_text_size" />
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
-
+        <!-- Main Alert Toggle Card -->
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            app:cardBackgroundColor="@color/card_surface"
-            app:cardCornerRadius="18dp"
-            app:cardElevation="2dp"
-            app:strokeWidth="0dp">
-
+            android:layout_marginBottom="@dimen/spacing_16"
+            style="@style/Widget.SmartFireMonitoring.Card">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
-                android:orientation="horizontal"
                 android:padding="@dimen/card_padding">
-
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:orientation="vertical">
-
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Cho phép cảnh báo"
-                        android:textColor="@color/text_primary"
-                        android:textSize="@dimen/body_text_size"
-                        android:textStyle="bold" />
-
+                        android:text="CHO PHÉP CẢNH BÁO"
+                        style="@style/TextAppearance.SmartFireMonitoring.Label" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="2dp"
-                        android:text="Bật/tắt toàn bộ luồng cảnh báo của hệ thống"
-                        android:textColor="@color/text_secondary"
-                        android:textSize="@dimen/caption_text_size" />
+                        android:layout_marginTop="@dimen/spacing_4"
+                        android:text="Bật/tắt toàn bộ luồng cảnh báo"
+                        style="@style/TextAppearance.SmartFireMonitoring.MutedBody" />
                 </LinearLayout>
-
                 <com.google.android.material.switchmaterial.SwitchMaterial
                     android:id="@+id/switchAlertEnabled"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:checked="true" />
+                    android:checked="true"
+                    android:thumbTint="@color/primary"
+                    app:trackTint="@color/info_soft" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
+        <!-- Snooze Control Card -->
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            app:cardBackgroundColor="@color/card_surface"
-            app:cardCornerRadius="18dp"
-            app:cardElevation="2dp"
-            app:strokeWidth="0dp">
-
+            android:layout_marginBottom="@dimen/spacing_16"
+            style="@style/Widget.SmartFireMonitoring.Card">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="@dimen/card_padding">
+                android:padding="@dimen/card_padding"
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="12dp"
-                    android:text="Tạm tắt (Snooze)"
-                    android:textColor="@color/text_primary"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:text="Chế độ tạm tắt (Snooze)"
+                    style="@style/TextAppearance.SmartFireMonitoring.Label"
+                    android:layout_marginBottom="@dimen/spacing_16"/>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.SmartFireMonitoring.InputLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="12dp"
-                    android:hint="Thời gian (phút)">
-
+                    android:layout_marginBottom="@dimen/spacing_16"
+                    android:hint="Thời gian tạm ngưng (phút)"
+                    app:startIconDrawable="@android:drawable/ic_lock_idle_alarm"
+                    app:startIconTint="@color/primary"
+                    style="@style/Widget.SmartFireMonitoring.InputLayout">
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etSnoozeDuration"
                         android:layout_width="match_parent"
@@ -152,65 +100,73 @@
                         android:text="10" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnSnooze"
-                    style="@style/Widget.SmartFireMonitoring.PrimaryButton"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:text="Tạm tắt cảnh báo" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnResetSnooze"
-                    style="@style/Widget.SmartFireMonitoring.SecondaryButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:layout_marginTop="10dp"
-                    android:text="Reset tạm tắt" />
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnSnooze"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/button_min_height"
+                        android:layout_weight="1.5"
+                        android:layout_marginEnd="@dimen/spacing_8"
+                        android:text="TẠM TẮT"
+                        app:cornerRadius="@dimen/button_corner_radius"
+                        style="@style/Widget.SmartFireMonitoring.Button.Primary" />
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnResetSnooze"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/button_min_height"
+                        android:layout_weight="1"
+                        android:text="RESET"
+                        app:cornerRadius="@dimen/button_corner_radius"
+                        style="@style/Widget.SmartFireMonitoring.Button.Secondary" />
+                </LinearLayout>
 
                 <TextView
                     android:id="@+id/tvCountdown"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
+                    android:layout_marginTop="@dimen/spacing_16"
                     android:gravity="center"
+                    android:background="@color/warning_soft"
+                    android:padding="@dimen/spacing_12"
                     android:text="⏱️ Đang tạm tắt: còn --:--"
-                    android:textColor="@color/warning_yellow"
-                    android:textSize="@dimen/body_text_size"
+                    android:textColor="@color/warning"
                     android:textStyle="bold"
                     android:visibility="gone" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
+        <!-- Last Trigger Event Card -->
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardBackgroundColor="@color/chip_danger_bg"
-            app:cardCornerRadius="18dp"
-            app:cardElevation="2dp"
-            app:strokeWidth="0dp">
-
+            android:layout_marginBottom="@dimen/spacing_24"
+            app:cardBackgroundColor="@color/danger_soft"
+            app:cardElevation="0dp"
+            app:strokeWidth="1dp"
+            app:strokeColor="@color/danger"
+            app:cardCornerRadius="@dimen/card_corner_radius">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="@dimen/card_padding">
-
+                android:padding="@dimen/spacing_16"
+                android:orientation="vertical">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:text="Lần phát hiện cháy gần nhất"
-                    android:textColor="@color/danger_red"
-                    android:textSize="@dimen/caption_text_size"
-                    android:textStyle="bold" />
-
+                    android:text="Phát hiện gần nhất"
+                    style="@style/TextAppearance.SmartFireMonitoring.Label"
+                    android:textColor="@color/danger" />
                 <TextView
                     android:id="@+id/tvLastTriggered"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Chưa có dữ liệu"
-                    android:textColor="@color/danger_red"
-                    android:textSize="@dimen/body_text_size"
+                    android:layout_marginTop="@dimen/spacing_8"
+                    android:text="Chưa có dữ liệu sự cố"
+                    android:textColor="@color/danger"
+                    android:textSize="@dimen/text_size_body"
                     android:textStyle="bold" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>

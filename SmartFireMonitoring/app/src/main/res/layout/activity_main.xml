@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
@@ -21,13 +22,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/surface"
-        app:itemIconSize="20dp"
+        android:elevation="8dp"
+        app:itemBackground="@android:color/transparent"
+        app:itemIconSize="22dp"
         app:itemIconTint="@color/bottom_nav_selector"
+        app:itemRippleColor="@android:color/transparent"
         app:itemTextAppearanceActive="@style/TextAppearance.SmartFireMonitoring.BottomNav"
         app:itemTextAppearanceInactive="@style/TextAppearance.SmartFireMonitoring.BottomNav"
         app:itemTextColor="@color/bottom_nav_selector"
-        app:itemRippleColor="@android:color/transparent"
-        app:itemBackground="@android:color/transparent"
         app:labelVisibilityMode="labeled"
         app:menu="@menu/bottom_nav_menu" />
 
