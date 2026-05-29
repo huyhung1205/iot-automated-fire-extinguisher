@@ -6,6 +6,9 @@ on:
       - "v*"
   workflow_dispatch:
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 permissions:
   contents: write
 
@@ -26,13 +29,28 @@ jobs:
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
 
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Install Android platform and build-tools
+        run: |
+          sdkmanager --install "platform-tools" "platforms;android-36" "build-tools;36.0.0"
+
       - name: Ensure Gradle wrapper is executable
         working-directory: SmartFireMonitoring
         run: chmod +x gradlew
 
+      - name: Restore Firebase config
+        run: |
+          if [ -z "${{ secrets.GOOGLE_SERVICES_JSON }}" ]; then
+            echo "::error::Missing secret GOOGLE_SERVICES_JSON. Add your app/google-services.json content as a repository secret."
+            exit 1
+          fi
+          printf '%s' '${{ secrets.GOOGLE_SERVICES_JSON }}' > SmartFireMonitoring/app/google-services.json
+
       - name: Build debug APK
         working-directory: SmartFireMonitoring
-        run: bash ./gradlew :app:assembleDebug
+        run: bash ./gradlew :app:assembleDebug --stacktrace --no-daemon
 
       - name: Prepare release artifact
         run: |
