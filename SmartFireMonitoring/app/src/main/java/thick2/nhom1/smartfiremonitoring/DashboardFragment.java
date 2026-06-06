@@ -141,8 +141,8 @@ public class DashboardFragment extends Fragment {
                     tvTemp.setTextColor(Color.parseColor("#B91C1C"));
                     tvHumidity.setTextColor(Color.parseColor("#B91C1C"));
                 } else {
-                    tvTemp.setText("🌡 Nhiệt độ: " + valueOrPlaceholder(temp, "--") + "°C");
-                    tvHumidity.setText("💧 Độ ẩm: " + valueOrPlaceholder(hum, "--") + "%");
+                    tvTemp.setText(valueOrPlaceholder(temp, "--") + "°C");
+                    tvHumidity.setText(valueOrPlaceholder(hum, "--") + "%");
                     tvTemp.setTextColor(Color.parseColor("#1E3A8A"));
                     tvHumidity.setTextColor(Color.parseColor("#0F766E"));
                 }
@@ -152,9 +152,9 @@ public class DashboardFragment extends Fragment {
                 String level = snapshot.child("sensors/mq2/level").getValue(String.class);
                 String mq2Status = snapshot.child("sensors/mq2/status").getValue(String.class);
                 if (isErrorStatus(mq2Status)) {
-                    tvMq2Value.setText("MQ-2: ERROR");
+                    tvMq2Value.setText("error");
                     tvMq2Value.setTextColor(Color.parseColor("#B91C1C"));
-                    tvMq2Level.setText("LỖI");
+                    tvMq2Level.setText("error");
                     tvMq2Level.setBackgroundColor(Color.parseColor("#FEE2E2"));
                     tvMq2Level.setTextColor(Color.parseColor("#B91C1C"));
                     mq2Card.setCardBackgroundColor(Color.parseColor("#FFF1F2"));
@@ -162,9 +162,9 @@ public class DashboardFragment extends Fragment {
                     if (level == null) {
                         level = "unknown";
                     }
-                    tvMq2Value.setText("💨 MQ-2: " + valueOrPlaceholder(mq2Value, "--"));
+                    tvMq2Value.setText(valueOrPlaceholder(mq2Value, "--"));
                     tvMq2Value.setTextColor(Color.parseColor("#334155"));
-                    tvMq2Level.setText("Mức: " + level.toUpperCase());
+                    tvMq2Level.setText(level.toUpperCase());
 
                     if ("safe".equals(level)) {
                         mq2Card.setCardBackgroundColor(Color.parseColor("#F0FDF4"));
@@ -199,21 +199,21 @@ public class DashboardFragment extends Fragment {
                 String direction = snapshot.child("sensors/flame/direction").getValue(String.class);
                 String flameStatus = snapshot.child("sensors/flame/status").getValue(String.class);
                 if (isErrorStatus(flameStatus)) {
-                    tvDirection.setText("Hướng: ERROR");
+                    tvDirection.setText("error");
                     tvDirection.setTextColor(Color.parseColor("#B91C1C"));
                     for (View eye : flameEyes) {
                         eye.setBackgroundResource(R.drawable.eye_status_yellow);
                     }
                 } else {
-                    tvDirection.setText("Hướng: " + (direction != null ? direction : "--"));
+                    tvDirection.setText((direction != null ? direction : "--"));
                     tvDirection.setTextColor(Color.parseColor("#334155"));
                 }
 
                 // Bơm và còi
                 Boolean pump = snapshot.child("actuators/pump").getValue(Boolean.class);
                 Boolean buzzer = snapshot.child("actuators/buzzer").getValue(Boolean.class);
-                tvPump.setText("Bơm: " + boolToStatus(pump));
-                tvBuzzer.setText("Còi: " + boolToStatus(buzzer));
+                tvPump.setText(boolToStatus(pump));
+                tvBuzzer.setText(boolToStatus(buzzer));
 
                 // Góc servo
                 Integer servoX = snapshot.child("actuators/servo/axis_x").getValue(Integer.class);

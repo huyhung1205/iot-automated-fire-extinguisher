@@ -240,6 +240,8 @@ public class HistoryFragment extends Fragment {
         event.mq2_level = child.child("mq2_level").getValue(String.class);
         event.flame_direction = child.child("flame_direction").getValue(String.class);
         event.flame_pattern = child.child("flame_pattern").getValue(String.class);
+        Boolean sensorFusionTriggered = child.child("sensor_fusion_triggered").getValue(Boolean.class);
+        event.sensor_fusion_triggered = Boolean.TRUE.equals(sensorFusionTriggered);
         event.action_taken = child.child("action_taken").getValue(String.class);
 
         Long resolvedAt = child.child("resolved_at").getValue(Long.class);

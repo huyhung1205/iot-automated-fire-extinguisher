@@ -50,7 +50,7 @@
                     android:paddingHorizontal="@dimen/spacing_8"
                     android:paddingVertical="2dp"
                     android:background="@color/danger_soft"
-                    android:text="FIRE"
+                    android:text="LỬA"
                     android:textColor="@color/danger"
                     android:textSize="12sp"
                     android:textStyle="bold" />

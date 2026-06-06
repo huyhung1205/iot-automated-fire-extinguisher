@@ -49,30 +49,22 @@ public class FireEventAdapter extends RecyclerView.Adapter<FireEventAdapter.Fire
         holder.tvPattern.setText("Pattern: " + event.getFlamePattern());
         holder.tvAction.setText("Xử lý: " + event.getActionTaken());
         holder.tvDuration.setText("Thời gian: " + event.getProcessingDuration());
-        String level = event.getMq2Level().toLowerCase(Locale.getDefault());
-        holder.tvLevel.setText(level.toUpperCase(Locale.getDefault()));
+        String triggerSource = event.getTriggerSourceLabel();
+        holder.tvLevel.setText(triggerSource);
 
-        int levelColor;
-        int levelTextColor;
-        switch (level) {
-            case "danger":
-                levelColor = Color.parseColor("#FEE2E2");
-                levelTextColor = Color.parseColor("#B91C1C");
-                holder.cardRoot.setStrokeColor(Color.parseColor("#EF4444"));
-                break;
-            case "warning":
-                levelColor = Color.parseColor("#FEF3C7");
-                levelTextColor = Color.parseColor("#B45309");
-                holder.cardRoot.setStrokeColor(Color.parseColor("#F59E0B"));
-                break;
-            default:
-                levelColor = Color.parseColor("#DCFCE7");
-                levelTextColor = Color.parseColor("#166534");
-                holder.cardRoot.setStrokeColor(Color.parseColor("#10B981"));
-                break;
+        int badgeColor;
+        int badgeTextColor;
+        if (event.isSensorFusionTriggered()) {
+            badgeColor = Color.parseColor("#FFEDD5");
+            badgeTextColor = Color.parseColor("#9A3412");
+            holder.cardRoot.setStrokeColor(Color.parseColor("#F97316"));
+        } else {
+            badgeColor = Color.parseColor("#FEE2E2");
+            badgeTextColor = Color.parseColor("#991B1B");
+            holder.cardRoot.setStrokeColor(Color.parseColor("#EF4444"));
         }
-        holder.tvLevel.setBackgroundTintList(ColorStateList.valueOf(levelColor));
-        holder.tvLevel.setTextColor(levelTextColor);
+        holder.tvLevel.setBackgroundTintList(ColorStateList.valueOf(badgeColor));
+        holder.tvLevel.setTextColor(badgeTextColor);
 
         if ("manual".equalsIgnoreCase(event.getActionTaken())) {
             holder.tvAction.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#E9D5FF")));

@@ -126,7 +126,7 @@ void readFlameSensors()
 void checkSensorFusion()
 {
     bool prevFusion = sensorFusionAlert;
-    sensorFusionAlert = (temperature >= tempWarning && mq2Level == MQ2_DANGER);
+    sensorFusionAlert = (temperature >= tempWarning && mq2Value >= mq2Warning);
 
     if (sensorFusionAlert && !prevFusion)
     {

@@ -296,7 +296,8 @@
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
-                    android:padding="@dimen/card_padding">
+                    android:padding="@dimen/card_padding"
+                    >
 
                     <ImageView
                         android:layout_width="@dimen/icon_size_hero"
@@ -371,7 +372,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/spacing_12"
                             android:layout_weight="1"
-                            android:text="PHÁT HIỆN LỬA"
+                            android:text="CẢM BIẾN LỬA"
                             style="@style/TextAppearance.SmartFireMonitoring.CardTitle" />
 
                     </LinearLayout>

@@ -14,6 +14,7 @@ public class FireEvent {
     public String mq2_level;
     public String flame_direction;
     public String flame_pattern;
+    public boolean sensor_fusion_triggered;
     public String action_taken;
     public long resolved_at;
 
@@ -42,6 +43,14 @@ public class FireEvent {
 
     public String getFlamePattern() {
         return safeText(flame_pattern, "-----");
+    }
+
+    public boolean isSensorFusionTriggered() {
+        return sensor_fusion_triggered;
+    }
+
+    public String getTriggerSourceLabel() {
+        return isSensorFusionTriggered() ? "GA + NHIỆT" : "LỬA";
     }
 
     public String getActionTaken() {

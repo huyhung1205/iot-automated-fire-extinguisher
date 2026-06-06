@@ -302,6 +302,11 @@ void logFireEvent(const char *action)
     if (!isFirebaseReady())
         return;
 
+    // Chỉ ghi log khi hệ thống thật sự đang ở trạng thái cháy.
+    // Điều này giúp tránh tạo log rỗng hoặc log do nhầm trạng thái.
+    if (!fireDetected)
+        return;
+
     FirebaseJson log;
     log.set("timestamp", (int)getTimestamp());
     log.set("time_readable", getTimeReadable());
@@ -321,8 +326,8 @@ void logFireEvent(const char *action)
     log.set("servo_x_at_event", currentPan);
     log.set("servo_y_at_event", currentTilt);
     log.set("action_taken", action);
-    log.set("pump_activated", true);
-    log.set("buzzer_activated", true);
+    log.set("pump_activated", pumpActive);
+    log.set("buzzer_activated", buzzerActive);
     log.set("alert_was_snoozed", false);
     log.set("sensor_fusion_triggered", sensorFusionAlert);
     log.set("resolved_at", 0);
