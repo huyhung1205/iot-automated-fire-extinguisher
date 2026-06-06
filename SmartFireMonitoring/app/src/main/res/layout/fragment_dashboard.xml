@@ -91,7 +91,7 @@
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- Core System Status Card -->
+                <!-- Core System Status Card -->
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -111,83 +111,113 @@
 
                     <View
                         android:id="@+id/viewStatusDot"
-                        android:layout_width="10dp"
-                        android:layout_height="10dp"
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
                         android:background="@drawable/eye_status_green" />
 
                     <TextView
-                        android:id="@+id/tvStatus"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/spacing_medium"
                         android:layout_weight="1"
-                        android:text="Thiết bị: Trực tuyến"
-                        style="@style/TextAppearance.SmartFireMonitoring.ScreenTitle"
-                        android:textSize="16sp" />
+                        android:text="Trạng thái hệ thống"
+                        style="@style/TextAppearance.SmartFireMonitoring.ScreenTitle" />
 
                     <TextView
                         android:id="@+id/tvFirmwareVersion"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Fimware: 2.2.0"
-                        style="@style/TextAppearance.SmartFireMonitoring.Caption" />
+                        android:background="@color/info_soft"
+                        android:paddingHorizontal="@dimen/spacing_8"
+                        android:paddingVertical="2dp"
+                        android:text="FW 2.2.0"
+                        android:textColor="@color/primary_variant"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
                 </LinearLayout>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginVertical="@dimen/spacing_large"
-                    android:background="@color/border" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_4"
+                    android:text="ESP32 • Firebase RTDB • Heartbeat"
+                    style="@style/TextAppearance.SmartFireMonitoring.Caption" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:baselineAligned="false"
+                    android:layout_marginTop="@dimen/spacing_16"
                     android:orientation="horizontal">
 
-                    <LinearLayout
+                    <com.google.android.material.card.MaterialCardView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:orientation="vertical">
+                        android:layout_marginEnd="@dimen/spacing_8"
+                        app:cardBackgroundColor="@color/surface_variant"
+                        app:cardCornerRadius="@dimen/chip_corner_radius"
+                        app:cardElevation="0dp"
+                        app:strokeColor="@color/border"
+                        app:strokeWidth="1dp">
 
-                        <TextView
-                            android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="TRẠNG THÁI"
-                            style="@style/TextAppearance.SmartFireMonitoring.Label" />
+                            android:orientation="vertical"
+                            android:padding="@dimen/spacing_12">
 
-                        <TextView
-                            android:id="@+id/tvEsp32Power"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/spacing_tiny"
-                            android:text="Đang hoạt động"
-                            style="@style/TextAppearance.SmartFireMonitoring.Body"
-                            android:textStyle="bold" />
-                    </LinearLayout>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Thiết bị"
+                                style="@style/TextAppearance.SmartFireMonitoring.Label" />
 
-                    <LinearLayout
+                            <TextView
+                                android:id="@+id/tvEsp32Power"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/spacing_4"
+                                android:text="Offline"
+                                android:textColor="@color/text_primary"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:orientation="vertical">
+                        android:layout_marginStart="@dimen/spacing_8"
+                        app:cardBackgroundColor="@color/surface_variant"
+                        app:cardCornerRadius="@dimen/chip_corner_radius"
+                        app:cardElevation="0dp"
+                        app:strokeColor="@color/border"
+                        app:strokeWidth="1dp">
 
-                        <TextView
-                            android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="PHẢN HỒI"
-                            style="@style/TextAppearance.SmartFireMonitoring.Label" />
+                            android:orientation="vertical"
+                            android:padding="@dimen/spacing_12">
 
-                        <TextView
-                            android:id="@+id/tvHeartbeatStatus"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/spacing_tiny"
-                            android:text="2s trước"
-                            style="@style/TextAppearance.SmartFireMonitoring.Body"
-                            android:textStyle="bold" />
-                    </LinearLayout>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Heartbeat"
+                                style="@style/TextAppearance.SmartFireMonitoring.Label" />
+
+                            <TextView
+                                android:id="@+id/tvHeartbeatStatus"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/spacing_4"
+                                android:text="--"
+                                android:textColor="@color/text_primary"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
                 </LinearLayout>
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
@@ -198,7 +228,6 @@
             android:layout_marginBottom="@dimen/spacing_large"
             android:text="Cảm biến môi trường"
             style="@style/TextAppearance.SmartFireMonitoring.ScreenTitle" />
-
         <!-- Sensor Grid -->
         <GridLayout
             android:layout_width="match_parent"

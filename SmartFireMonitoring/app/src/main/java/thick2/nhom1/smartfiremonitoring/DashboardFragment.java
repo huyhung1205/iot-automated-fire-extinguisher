@@ -27,14 +27,14 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 /**
- * Fragment Trang chủ:
- * - Hiển thị dữ liệu cảm biến realtime
- * - Theo dõi trạng thái kết nối internet của điện thoại
- * - Theo dõi ESP32 online/offline dựa trên last_seen
+ * Fragment Trang chá»§:
+ * - Hiá»ƒn thá»‹ dá»¯ liá»‡u cáº£m biáº¿n realtime
+ * - Theo dÃµi tráº¡ng thÃ¡i káº¿t ná»‘i internet cá»§a Ä‘iá»‡n thoáº¡i
+ * - Theo dÃµi ESP32 online/offline dá»±a trÃªn last_seen
  */
 public class DashboardFragment extends Fragment {
 
-    private static final long ESP32_OFFLINE_THRESHOLD_SECONDS = 20L;
+    private static final long ESP32_OFFLINE_THRESHOLD_SECONDS = 5L;
     private static final long ESP32_CHECK_INTERVAL_MS = 5000L;
     private static final int HEARTBEAT_MISS_CONFIRMATION_COUNT = 3;
 
@@ -49,7 +49,6 @@ public class DashboardFragment extends Fragment {
     private TextView tvBuzzer;
     private TextView tvServoX;
     private TextView tvServoY;
-    private TextView tvStatus;
     private TextView tvFirmwareVersion;
     private TextView tvEsp32Power;
     private TextView tvHeartbeatStatus;
@@ -75,7 +74,7 @@ public class DashboardFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+            Bundle savedInstanceState) {
         // Inflate layout dashboard và ánh xạ các view hiển thị dữ liệu realtime
         View view = inflater.inflate(R.layout.fragment_dashboard, container, false);
 
@@ -90,7 +89,6 @@ public class DashboardFragment extends Fragment {
         tvBuzzer = view.findViewById(R.id.tvBuzzer);
         tvServoX = view.findViewById(R.id.tvServoX);
         tvServoY = view.findViewById(R.id.tvServoY);
-        tvStatus = view.findViewById(R.id.tvStatus);
         tvFirmwareVersion = view.findViewById(R.id.tvFirmwareVersion);
         tvEsp32Power = view.findViewById(R.id.tvEsp32Power);
         tvHeartbeatStatus = view.findViewById(R.id.tvHeartbeatStatus);
@@ -209,7 +207,7 @@ public class DashboardFragment extends Fragment {
                     tvDirection.setTextColor(Color.parseColor("#334155"));
                 }
 
-                // Bơm và còi
+                // Bấm và còi
                 Boolean pump = snapshot.child("actuators/pump").getValue(Boolean.class);
                 Boolean buzzer = snapshot.child("actuators/buzzer").getValue(Boolean.class);
                 tvPump.setText(boolToStatus(pump));
@@ -273,17 +271,11 @@ public class DashboardFragment extends Fragment {
     }
 
     private void updateEsp32StatusUi() {
-        if (tvStatus == null || statusDot == null) {
-            return;
-        }
-
         if (lastSeenTimestamp <= 0L) {
             heartbeatMissCount = 0;
-            tvStatus.setText("Heartbeat Firebase: Chưa có dữ liệu mới");
-            tvStatus.setTextColor(Color.parseColor("#64748B"));
             statusDot.setBackgroundResource(R.drawable.eye_status_yellow);
             if (tvHeartbeatStatus != null) {
-                tvHeartbeatStatus.setText("Heartbeat Firebase: --");
+                tvHeartbeatStatus.setText("--");
             }
             return;
         }
@@ -292,23 +284,17 @@ public class DashboardFragment extends Fragment {
         long diff = Math.max(0L, now - lastSeenTimestamp);
         boolean heartbeatFresh = diff <= ESP32_OFFLINE_THRESHOLD_SECONDS;
         if (tvHeartbeatStatus != null) {
-            tvHeartbeatStatus.setText("Heartbeat Firebase: " + diff + "s ago");
+            tvHeartbeatStatus.setText(diff + "s");
         }
 
         if (heartbeatFresh) {
             heartbeatMissCount = 0;
-            tvStatus.setText("Heartbeat Firebase: Online (" + diff + "s)");
-            tvStatus.setTextColor(Color.parseColor("#4CAF50"));
             statusDot.setBackgroundResource(R.drawable.eye_status_green);
         } else {
             heartbeatMissCount++;
             if (heartbeatMissCount < HEARTBEAT_MISS_CONFIRMATION_COUNT) {
-                tvStatus.setText("Heartbeat Firebase: Chậm (" + heartbeatMissCount + "/" + HEARTBEAT_MISS_CONFIRMATION_COUNT + ")");
-                tvStatus.setTextColor(Color.parseColor("#F59E0B"));
                 statusDot.setBackgroundResource(R.drawable.eye_status_yellow);
             } else {
-                tvStatus.setText("Heartbeat Firebase: Offline (" + diff + "s)");
-                tvStatus.setTextColor(Color.parseColor("#F44336"));
                 statusDot.setBackgroundResource(R.drawable.eye_status_red);
             }
         }
@@ -316,11 +302,10 @@ public class DashboardFragment extends Fragment {
 
     private void updateDeviceStatusUi() {
         if (tvEsp32Power != null) {
-            boolean esp32Running = lastSeenTimestamp > 0L
-                    || (firmwareVersion != null && !"--".equals(firmwareVersion))
-                    || wifiConnectedStable;
-            tvEsp32Power.setText(esp32Running ? "Đang chạy" : "Chưa có dữ liệu");
-            tvEsp32Power.setTextColor(Color.parseColor(esp32Running ? "#0F172A" : "#64748B"));
+            boolean esp32Online = lastSeenTimestamp > 0L
+                    && (System.currentTimeMillis() / 1000 - lastSeenTimestamp) <= ESP32_OFFLINE_THRESHOLD_SECONDS;
+            tvEsp32Power.setText(esp32Online ? "Online" : "Offline");
+            tvEsp32Power.setTextColor(Color.parseColor(esp32Online ? "#166534" : "#B91C1C"));
         }
     }
 

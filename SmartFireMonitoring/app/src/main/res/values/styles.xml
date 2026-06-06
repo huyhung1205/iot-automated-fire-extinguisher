@@ -2,7 +2,6 @@
 <resources>
     <!-- Premium Card Style - Unified -->
     <style name="Widget.SmartFireMonitoring.Card" parent="Widget.Material3.CardView.Elevated">
-        <item name="android:minHeight">@dimen/card_min_height</item>
         <item name="cardCornerRadius">@dimen/card_corner_radius</item>
         <item name="cardElevation">@dimen/card_elevation</item>
         <item name="cardUseCompatPadding">false</item>
